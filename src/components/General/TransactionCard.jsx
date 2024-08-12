@@ -11,7 +11,7 @@ export default function TransactionCard({
   const displayDate = new Date(date);
   console.log(displayDate);
   return (
-    <div className="flex border-t-2 border-dashed border-white items-center justify-between h-fit w-full md:w-[80%] mx-auto p-3 md:p-5">
+    <div className="flex bg-neutral-800 shadow-sm shadow-neutral-400 mb-2 rounded-lg items-center justify-between h-fit w-full md:w-[80%] mx-auto p-3 md:p-5">
       <div className="flex items-center justify-center gap-3">
         <div
           title={category}

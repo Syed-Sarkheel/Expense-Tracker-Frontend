@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa";
 
 export default function LoginForm({ sendUserData }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function LoginForm({ sendUserData }) {
           type={"email"}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="bg-black text-white py-0.5 px-1.5 border-b border-green-500 focus:border-white focus:outline-none h-[2.5rem] w-[18rem]"
+          className="bg-black text-white py-0.5 px-1.5 border-b border-green-500 focus:border-green-300 focus:outline-none h-[2.5rem] w-[18rem]"
           autoFocus
           required
           placeholder="robin@hotmail.com"
@@ -26,14 +28,22 @@ export default function LoginForm({ sendUserData }) {
 
       <div className="flex flex-col">
         <label className="font-semibold">Password:</label>
-        <input
-          type="password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-          className="bg-black text-white py-0.5 px-1.5 border-b border-green-500 focus:border-white focus:outline-none h-[2.5rem] w-[18rem]"
-          placeholder="******"
-        />
+        <div className="flex justify-center items-center border-b border-green-500 focus:border-green-300">
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            className="bg-black text-white py-0.5 px-1.5 h-[2.5rem] w-[16rem] focus:outline-none"
+            placeholder="******"
+          />
+          <FaRegEye
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+            className="cursor-pointer"
+          />
+        </div>
       </div>
       <span className="flex text-[1rem] cursor-pointer justify-end">
         Forgot password?
