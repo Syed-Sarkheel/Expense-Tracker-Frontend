@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../components/General/Sidebar";
 import { IoWallet } from "react-icons/io5";
 import { GiMoneyStack, GiExpense } from "react-icons/gi";
 import { FaIndianRupeeSign } from "react-icons/fa6";
+import Cookies from "js-cookie";
+import useGetData from "../../hooks/useGetData";
 
 export default function Dashboard() {
-  const username = "Syed Sarkheel";
+  const [username] = useState(JSON.parse(Cookies.get("user"))?.name);
+
+  const {
+    data: balance,
+    error: balanceError,
+    message: balanceMessage,
+  } = useGetData("/balance", []);
+
+  const {
+    data: income,
+    error: incomeError,
+    message: incomeeMessage,
+  } = useGetData("/income", []);
+
+  const {
+    data: expense,
+    error: expenseError,
+    message: expenseMessage,
+  } = useGetData("/expense", []);
+
   const transactions = [
     {
       icon: <GiMoneyStack className="text-4xl text-green-500" />,
       title: "Total Income",
-      amount: "16000",
+      amount: income || 0,
     },
     {
       icon: <GiExpense className="text-4xl text-green-500" />,
       title: "Total Expense",
-      amount: "16000",
+      amount: expense || 0,
     },
     {
       icon: <IoWallet className="text-4xl text-green-500" />,
       title: "Total Balance",
-      amount: "16000",
+      amount: balance || 0,
     },
   ];
 

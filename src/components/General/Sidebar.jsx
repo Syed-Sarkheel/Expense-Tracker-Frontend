@@ -6,10 +6,18 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
 import { FaUserCog } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const logout = () => {
+    Cookies.remove("at");
+    Cookies.remove("rt");
+    Cookies.remove("user");
+    navigate("/");
+  };
 
   const css = "text-white text-3xl bg-transparent m-auto p-auto ";
 
@@ -35,7 +43,6 @@ export default function Sidebar() {
       icon: <FaUserCog className={css} />,
       url: "/user/profile",
     },
-    { title: "Logout", icon: <CiLogout className={css} /> },
   ];
 
   return (
@@ -52,6 +59,13 @@ export default function Sidebar() {
           {iconData.icon}
         </div>
       ))}
+      <div
+        title={"Logout"}
+        className="duration-500 w-[3rem] h-[3rem] bg-black rounded-full hover:bg-[#51D289] mx-auto flex items-center justify-center mb-10"
+        onClick={logout}
+      >
+        <CiLogout className={css} />
+      </div>
     </div>
   );
 }

@@ -1,13 +1,26 @@
+import { useNavigate } from "react-router-dom";
 import LoginImg from "../assets/login_image.svg";
 import SignupForm from "../components/Forms/SignupForm";
+import usePostData from "../hooks/usePostData";
 
 export default function SignupPage() {
-  const UserDataSubmittion = (data) => {
-    console.log(data);
-  };
+  const fetchData = usePostData("/auth/register");
+  const navigate = useNavigate();
 
-  const OtpDataSubmittion = (data) => {
-    console.log(data);
+  const UserDataSubmittion = async (sendData) => {
+    console.log(sendData);
+    const { data, err, message } = await fetchData(sendData);
+    setTimeout(() => {
+      if (err) {
+        alert(message);
+      } else {
+        alert(
+          `User with email: ${data?.user?.email} is successfully registered.`
+        );
+        console.log(data, err, message);
+        navigate("/");
+      }
+    }, 500);
   };
 
   return (
@@ -22,10 +35,7 @@ export default function SignupPage() {
         <h3 className="text-5xl font-bold cursor-default text-center">
           Sign Up
         </h3>
-        <SignupForm
-          setUserData={UserDataSubmittion}
-          setOtpData={OtpDataSubmittion}
-        />
+        <SignupForm setUserData={UserDataSubmittion} />
       </div>
     </div>
   );

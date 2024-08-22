@@ -1,9 +1,26 @@
+import { useNavigate } from "react-router-dom";
 import LoginImg from "../assets/login_image.svg";
 import LoginForm from "../components/Forms/LoginForm";
+import usePostData from "../hooks/usePostData";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
-  const sendUserData = (data) => {
-    console.log(data);
+  const fetchData = usePostData("/auth/login");
+  const navigate = useNavigate();
+
+  const sendUserData = async (sendData) => {
+    console.log(sendData);
+    const { data, err, message, at } = await fetchData(sendData);
+    if (err) {
+      alert(message);
+    } else {
+      Cookies.set("at", data?.accessToken, { expires: 1 });
+      Cookies.set("rt", data?.refreshToken);
+      Cookies.set("user", JSON.stringify(data?.user));
+      alert(`Logging in user with email: ${data?.user?.email}`);
+      console.log("Response: ", { data, err, message, at });
+      navigate("/user");
+    }
   };
 
   return (
