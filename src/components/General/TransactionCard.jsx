@@ -1,3 +1,4 @@
+import { BiRupee } from "react-icons/bi";
 import { SiCodenewbie } from "react-icons/si";
 
 export default function TransactionCard({
@@ -5,6 +6,7 @@ export default function TransactionCard({
   category = "",
   amount = "",
   date = "",
+  type = "",
 }) {
   const css = "text-black text-2xl md:text-3xl m-auto p-auto";
 
@@ -21,13 +23,20 @@ export default function TransactionCard({
           <SiCodenewbie className={css} />
         </div>
         <div>
-          <h5 className="text-2xl max-w-[9rem] overflow-x-hidden">
+          <h5 className="text-2xl max-w-[12rem] overflow-x-hidden">
             {description}
           </h5>
           <p>Date: {date}</p>
         </div>
       </div>
-      <h4 className="text-xl md:text-3xl text-center">{amount}</h4>
+      <p
+        className={`text-xl items-center flex md:text-3xl text-center ${
+          type === "income" ? "text-green-500" : "text-red-500"
+        }`}
+      >
+        <BiRupee />
+        {amount}
+      </p>
     </div>
   );
 }

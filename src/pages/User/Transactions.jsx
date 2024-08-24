@@ -12,9 +12,14 @@ export default function Transactions() {
 
   useEffect(() => {
     if (data) {
-      setTransactionList(data || []);
+      // Sort transactions based on date
+      const sortedData = [...data].sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      setTransactionList(sortedData || []);
     }
   }, [data]);
+
   useEffect(() => {
     const list = transactionList.filter((transaction) => {
       return (
@@ -43,7 +48,7 @@ export default function Transactions() {
             value={search}
             placeholder="search..."
             onChange={(e) => setSearch(e.target.value)}
-            className="py-2 px-3 text-black outline-none rounded-full"
+            className="py-2 px-3 text-white bg-neutral-800 outline-none rounded-lg"
           />
         </div>
         <div className="w-3/4 mx-auto rounded-lg">
@@ -54,6 +59,7 @@ export default function Transactions() {
               date={transaction?.date}
               category={transaction?.category}
               amount={transaction?.amount}
+              type={transaction?.type}
             />
           ))}{" "}
         </div>

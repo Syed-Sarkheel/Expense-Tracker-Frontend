@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import Sidebar from "../../components/General/Sidebar";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { MdEdit } from "react-icons/md";
 import Cookies from "js-cookie";
 import usePutData from "../../hooks/usePutData";
+import { FaRegEye } from "react-icons/fa";
 export default function UserProfile() {
   const [user] = useState(JSON.parse(Cookies.get("user")));
   const updateData = usePutData(`/user/${user?._id}`);
   const [password, setPassword] = useState("");
   const [editPassword, setEditPassword] = useState(false);
+  const [viewPassword, setViewPassword] = useState(false);
   console.log(editPassword);
 
   const UpdatePass = async () => {
@@ -66,14 +67,22 @@ export default function UserProfile() {
           {editPassword && (
             <div className="flex flex-col gap-3 ">
               <label className="text-xl font-medium mb-2">Password:</label>
-              <input
-                type="password"
-                value={password}
-                required
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out border-b-2 border-green-500"
-                placeholder="******"
-              />
+              <div className="flex justify-center items-center border-b-2 border-green-500 focus:border-green-300">
+                <input
+                  type={!viewPassword ? `password` : `text`}
+                  value={password}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-transparent text-lg p-2 outline-none transition-all duration-300 ease-in-out"
+                  placeholder="******"
+                />
+                <FaRegEye
+                  onClick={() => {
+                    setViewPassword(!viewPassword);
+                  }}
+                  className="cursor-pointer"
+                />
+              </div>
               <button
                 className="bg-green-500 text-white rounded-md p-3 mt-4 hover:bg-green-600 transition-all duration-300 ease-in-out"
                 onClick={UpdatePass}
@@ -82,7 +91,10 @@ export default function UserProfile() {
               </button>
               <button
                 className="bg-transparent text-white rounded-md p-3 mt-4 hover:bg-red-400 transition-all duration-300 ease-in-out"
-                onClick={() => setEditPassword(false)}
+                onClick={() => {
+                  setEditPassword(false);
+                  setPassword("");
+                }}
               >
                 Cancel Update
               </button>

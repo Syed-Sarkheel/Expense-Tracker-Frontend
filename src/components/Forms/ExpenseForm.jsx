@@ -1,23 +1,44 @@
 import React, { useState } from "react";
 
-export default function IncomeForm({ submitFormData }) {
-  const [incomeDate, setIncomeDate] = useState("");
+export default function ExpenseForm() {
+  const [expenseDate, setExpenseDate] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [createCategory, setCreateCategory] = useState("");
 
   const submitForm = (e) => {
     e.preventDefault();
-    submitFormData({ incomeDate, amount, description, category });
-    console.log({ incomeDate, amount, description, category });
-    setIncomeDate("");
+
+    if (checked)
+      console.log({
+        expenseDate,
+        amount,
+        description,
+        category: createCategory,
+        newCategory: true,
+      });
+    else
+      console.log({
+        expenseDate,
+        amount,
+        description,
+        category,
+        newCategory: false,
+      });
+
+    setExpenseDate("");
     setAmount("");
     setDescription("");
     setCategory("");
+    setChecked(false);
+    setCreateCategory("");
   };
+
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-full lg:w-1/2 xl:w-1/2 p-5">
-      <h2 className="text-4xl mb-8 font-semibold text-white">Add Income</h2>
+      <h2 className="text-4xl mb-8 font-semibold text-white">Add Expense</h2>
       <form
         onSubmit={submitForm}
         action=""
@@ -28,12 +49,11 @@ export default function IncomeForm({ submitFormData }) {
             Date
           </label>
           <input
-            value={incomeDate}
             type="date"
             id="date"
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
             required
-            onChange={(e) => setIncomeDate(e.target.value)}
+            onChange={(e) => setExpenseDate(e.target.value)}
           />
         </div>
         <div className="flex flex-col">
@@ -41,26 +61,24 @@ export default function IncomeForm({ submitFormData }) {
             Amount
           </label>
           <input
-            value={amount}
             type="number"
             id="amount"
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
             required
+            min={0}
             onChange={(e) => setAmount(e.target.value)}
             onWheel={(e) => e.target.blur()}
           />
         </div>
         <div className="flex flex-col">
           <label htmlFor="category" className="text-xl font-medium">
-            Source
+            Category
           </label>
           <input
-            value={category}
             type="text"
             id="category"
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
             required
-            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
         <div className="flex flex-col">
@@ -68,17 +86,16 @@ export default function IncomeForm({ submitFormData }) {
             Description
           </label>
           <textarea
-            value={description}
             id="description"
+            className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out resize-none"
             onChange={(e) => setDescription(e.target.value)}
-            className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none resize-none focus:border-green-700 transition-all duration-300 ease-in-out"
           />
         </div>
         <button
           type="submit"
           className="w-1/2 mx-auto mt-6 p-3 text-white bg-green-500 rounded-md hover:bg-green-600 active:bg-green-700 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
         >
-          Add Income
+          Add Expense
         </button>
       </form>
     </div>
