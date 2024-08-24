@@ -41,7 +41,11 @@ export default function Dashboard() {
     {
       icon: <IoWallet className="text-4xl text-green-500" />,
       title: "Total Balance",
-      amount: balance || 0,
+      amount: (
+        <span className={balance >= 0 ? "text-green-500" : "text-red-500"}>
+          {balance || 0}
+        </span>
+      ),
     },
   ];
 

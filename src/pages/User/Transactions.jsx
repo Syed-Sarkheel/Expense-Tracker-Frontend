@@ -1,66 +1,33 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../../components/General/Sidebar";
 import TransactionCard from "../../components/General/TransactionCard";
+import useGetData from "../../hooks/useGetData";
 
 export default function Transactions() {
   const [search, setSearch] = useState("");
-  const [transactionList, setTransactionList] = useState([
-    {
-      _id: "123",
-      amount: 5000,
-      category: "Rent",
-      description: "Rent",
-      date: "2024-03-15",
-    },
-    {
-      _id: "124",
-      amount: 6000,
-      category: "Rent",
-      description: "Rent",
-      date: "2024-03-15",
-    },
-    {
-      _id: "128",
-      amount: 8000,
-      category: "Food",
-      description: "Food",
-      date: "2024-03-15",
-    },
-    {
-      _id: "129",
-      amount: 7000,
-      category: "Party",
-      description: "Party",
-      date: "2024-03-15",
-    },
-    {
-      _id: "130",
-      amount: 8000,
-      category: "Food",
-      description: "Food",
-      date: "2024-03-15",
-    },
-  ]);
+  const [transactionList, setTransactionList] = useState([]);
   const [transactions, setTransactions] = useState(transactionList);
 
-  useEffect(() => {
-    function updateTransactions() {
-      const list = transactionList?.filter((transaction) => {
-        if (
-          transaction?.category
-            ?.toLocaleLowerCase()
-            ?.startsWith(search?.toLocaleLowerCase()) ||
-          transaction?.description
-            ?.toLocaleLowerCase()
-            ?.startsWith(search?.toLocaleLowerCase())
-        )
-          return transaction;
-      });
-      setTransactions(list);
-    }
+  const { data, error, message } = useGetData("/balance/transactions", []);
 
-    updateTransactions();
-  }, [search, transactionList, transactions]);
+  useEffect(() => {
+    if (data) {
+      setTransactionList(data || []);
+    }
+  }, [data]);
+  useEffect(() => {
+    const list = transactionList.filter((transaction) => {
+      return (
+        transaction?.category
+          ?.toLocaleLowerCase()
+          ?.startsWith(search?.toLocaleLowerCase()) ||
+        transaction?.description
+          ?.toLocaleLowerCase()
+          ?.startsWith(search?.toLocaleLowerCase())
+      );
+    });
+    setTransactions(list);
+  }, [search, transactionList, setTransactionList]);
 
   return (
     <div className="flex w-full">
@@ -83,12 +50,12 @@ export default function Transactions() {
           {transactions?.map((transaction) => (
             <TransactionCard
               key={transaction?._id}
-              description={transaction?.description}
+              description={transaction?.description || transaction?.category}
               date={transaction?.date}
               category={transaction?.category}
               amount={transaction?.amount}
             />
-          ))}
+          ))}{" "}
         </div>
       </div>
     </div>

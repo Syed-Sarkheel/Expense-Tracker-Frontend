@@ -8,8 +8,7 @@ export default function TransactionCard({
 }) {
   const css = "text-black text-2xl md:text-3xl m-auto p-auto";
 
-  const displayDate = new Date(date);
-  console.log(displayDate);
+  console.log(date);
   return (
     <div className="flex bg-neutral-800 shadow-sm shadow-neutral-400 mb-2 rounded-lg items-center justify-between h-fit w-full md:w-[80%] mx-auto p-3 md:p-5">
       <div className="flex items-center justify-center gap-3">
@@ -25,7 +24,7 @@ export default function TransactionCard({
           <h5 className="text-2xl max-w-[9rem] overflow-x-hidden">
             {description}
           </h5>
-          <p>Date: {displayDate.toLocaleDateString()}</p>
+          <p>Date: {date}</p>
         </div>
       </div>
       <h4 className="text-xl md:text-3xl text-center">{amount}</h4>
