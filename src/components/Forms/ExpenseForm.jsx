@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
-export default function ExpenseForm() {
+import Select from "react-select";
+export default function ExpenseForm({ submitFormData, getCategoryData }) {
   const [expenseDate, setExpenseDate] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
@@ -8,11 +8,16 @@ export default function ExpenseForm() {
   const [checked, setChecked] = useState(false);
   const [createCategory, setCreateCategory] = useState("");
 
+  const options = getCategoryData?.map((category) => {
+    return { value: category?._id, label: category?.name };
+  });
+  console.log(options);
+
   const submitForm = (e) => {
     e.preventDefault();
 
     if (checked)
-      console.log({
+      submitFormData({
         expenseDate,
         amount,
         description,
@@ -20,7 +25,7 @@ export default function ExpenseForm() {
         newCategory: true,
       });
     else
-      console.log({
+      submitFormData({
         expenseDate,
         amount,
         description,
@@ -35,7 +40,6 @@ export default function ExpenseForm() {
     setChecked(false);
     setCreateCategory("");
   };
-
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-full lg:w-1/2 xl:w-1/2 p-5">
       <h2 className="text-4xl mb-8 font-semibold text-white">Add Expense</h2>
@@ -70,17 +74,31 @@ export default function ExpenseForm() {
             onWheel={(e) => e.target.blur()}
           />
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="category" className="text-xl font-medium">
-            Category
-          </label>
+        <div className="flex gap-2 items-center text-center">
+          <input
+            type="checkbox"
+            className="h-4 w-4 cursor-pointer accent-green-500"
+            value={checked}
+            onChange={() => setChecked(!checked)}
+          />
+          <label>Create Catergory</label>
+        </div>
+        {!checked ? (
+          <Select
+            options={options}
+            className="w-[18rem] text-bl"
+            value={category}
+            onChange={(state) => setCategory(state)}
+          />
+        ) : (
           <input
             type="text"
-            id="category"
-            className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
-            required
+            value={createCategory}
+            onChange={(e) => setCreateCategory(e.target.value)}
+            placeholder="Type your category here"
+            className="border-b-2 border-green-500 bg-transparent text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
           />
-        </div>
+        )}
         <div className="flex flex-col">
           <label htmlFor="description" className="text-xl font-medium">
             Description
