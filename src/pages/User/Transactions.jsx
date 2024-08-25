@@ -35,7 +35,7 @@ export default function Transactions() {
   }, [search, transactionList, setTransactionList]);
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full max-h-lvh cursor-default">
       <Sidebar />
       <div className="w-full">
         <h3 className="text-3xl text-[#FCF8D9] my-5 font-semibold ml-[10%] mt-10">
@@ -51,7 +51,8 @@ export default function Transactions() {
             className="py-2 px-3 text-white bg-neutral-800 outline-none rounded-lg"
           />
         </div>
-        <div className="w-3/4 mx-auto rounded-lg">
+        {/* Container for scrollable transactions */}
+        <div className="w-3/4 mx-auto rounded-lg h-[70%] overflow-auto hide-scrollbar">
           {transactions?.map((transaction) => (
             <TransactionCard
               key={transaction?._id}

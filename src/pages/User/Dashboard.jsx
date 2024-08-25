@@ -5,6 +5,8 @@ import { GiMoneyStack, GiExpense } from "react-icons/gi";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import useGetData from "../../hooks/useGetData";
+import GraphGenerator from "../../components/Graphs/GraphGenerator";
+import TransactionCard from "../../components/General/TransactionCard";
 
 export default function Dashboard() {
   const [username] = useState(JSON.parse(Cookies.get("user"))?.name);
@@ -18,7 +20,7 @@ export default function Dashboard() {
   const {
     data: income,
     error: incomeError,
-    message: incomeeMessage,
+    message: incomeMessage,
   } = useGetData("/income", []);
 
   const {
@@ -26,6 +28,14 @@ export default function Dashboard() {
     error: expenseError,
     message: expenseMessage,
   } = useGetData("/expense", []);
+
+  const {
+    data: transactionsData,
+    error: transactionsError,
+    message: transactionsMessage,
+  } = useGetData("/balance/transactions", []);
+
+  const recentTransactions = transactionsData?.slice(0, 3) || [];
 
   const transactions = [
     {
@@ -49,6 +59,12 @@ export default function Dashboard() {
     },
   ];
 
+  const graphValues = [
+    { label: "Total Income", value: income || 0 },
+    { label: "Total Expense", value: expense || 0 },
+    { label: "Total Balance", value: balance || 0 },
+  ];
+
   return (
     <div className="flex flex-col lg:flex-row gap-2 w-full">
       <Sidebar />
@@ -58,7 +74,7 @@ export default function Dashboard() {
           {transactions.map((transaction, index) => (
             <div
               key={index}
-              className="shadow-md shadow-green-700 hover:drop-shadow-lg p-5 w-full sm:w-[80%] md:w-[50%] lg:w-[25%] bg-neutral-800 gap-6 rounded-md flex flex-col items-center text-center"
+              className="shadow-md shadow-green-700 hover:drop-shadow-lg p-5 w-full sm:w-[80%] md:w-[50%] lg:w-[25%] bg-neutral-900 gap-6 rounded-md flex flex-col items-center text-center"
             >
               <div>{transaction.icon}</div>
               <div className="flex flex-col gap-4 bg-transparent">
@@ -70,6 +86,30 @@ export default function Dashboard() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="flex w-full gap-4 mt-4 cursor-default">
+          <div className="flex flex-col w-[50%] text-sm bg-neutral-900 p-4 rounded-md overflow-hidden shadow-sm shadow-green-700">
+            <h3 className="mb-8">Recent Transactions</h3>
+            {recentTransactions.map((transaction, index) => (
+              <TransactionCard
+                key={transaction._id}
+                description={transaction.description || transaction.category}
+                date={transaction.date}
+                category={transaction.category}
+                amount={transaction.amount}
+                type={transaction.type}
+              />
+            ))}
+          </div>
+          <div className="flex flex-col w-[50%] bg-neutral-900 rounded-md p-4 shadow-sm shadow-green-700">
+            <h3 className="mb-4 text-sm">Transaction Analysis</h3>
+            <GraphGenerator
+              data={[...graphValues]}
+              type="Line"
+              x="Transactions"
+              y="Amount"
+            />
+          </div>
         </div>
       </div>
     </div>

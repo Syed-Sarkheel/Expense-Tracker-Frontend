@@ -1,4 +1,5 @@
 import { BiRupee } from "react-icons/bi";
+import { GiExpense, GiMoneyStack } from "react-icons/gi";
 import { SiCodenewbie } from "react-icons/si";
 
 export default function TransactionCard({
@@ -17,10 +18,14 @@ export default function TransactionCard({
         <div
           title={category}
           className={`duration-500 w-[2rem] h-[2rem] md:w-[3rem] md:h-[3rem] rounded-full
-            bg-[#51D289]
+            bg-green-500
            flex items-center justify-center `}
         >
-          <SiCodenewbie className={css} />
+          {type === "income" ? (
+            <GiMoneyStack className={css} />
+          ) : (
+            <GiExpense className={css} />
+          )}
         </div>
         <div>
           <h5 className="text-2xl max-w-[12rem] overflow-x-hidden">

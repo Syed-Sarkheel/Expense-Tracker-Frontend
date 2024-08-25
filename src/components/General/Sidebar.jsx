@@ -46,14 +46,14 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="w-16 h-screen bg-neutral-800 flex flex-col gap-12 items-center justify-center ">
+    <div className="w-16 h-screen bg-neutral-900 flex flex-col gap-12 items-center justify-center ">
       {icons.map((iconData, index) => (
         <div
           key={index}
           title={iconData.title}
           className={`duration-700  ${
             pathname == iconData?.url ? "bg-green-600" : "bg-black"
-          } hover:bg-green-500 w-[3rem] h-[3rem] rounded-full flex justify-center cursor-pointer`}
+          } hover:bg-green-500 w-[3rem] h-[3rem] rounded-full flex justify-center cursor-pointer border border-neutral-700`}
           onClick={() => iconData.url && navigate(iconData.url)}
         >
           {iconData.icon}
@@ -61,7 +61,7 @@ export default function Sidebar() {
       ))}
       <div
         title={"Logout"}
-        className="duration-500 w-[3rem] h-[3rem] bg-black rounded-full hover:bg-green-500 mx-auto flex items-center justify-center mb-10"
+        className="duration-500 w-[3rem] h-[3rem] cursor-pointer bg-black rounded-full hover:bg-green-500 mx-auto flex items-center justify-center mb-10 border border-neutral-700"
         onClick={logout}
       >
         <CiLogout className={css} />
