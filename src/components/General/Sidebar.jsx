@@ -59,6 +59,7 @@ export default function Sidebar() {
           {iconData.icon}
         </div>
       ))}
+
       <div
         title={"Logout"}
         className="duration-500 w-[3rem] h-[3rem] cursor-pointer bg-black rounded-full hover:bg-green-500 mx-auto flex items-center justify-center mb-10 border border-neutral-700"

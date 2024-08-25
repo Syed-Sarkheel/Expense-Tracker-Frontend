@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 
 export default function LoginForm({ sendUserData }) {
@@ -11,6 +11,7 @@ export default function LoginForm({ sendUserData }) {
     e.preventDefault();
     sendUserData({ email, password });
   };
+
   return (
     <form className="flex flex-col gap-5 mx-auto" onSubmit={loginHandler}>
       <div className="flex flex-col">
@@ -45,10 +46,12 @@ export default function LoginForm({ sendUserData }) {
           />
         </div>
       </div>
-      <span className="flex text-[1rem] cursor-pointer justify-end">
-        Forgot password?
-      </span>
 
+      <Link to={"/otp"}>
+        <span className="flex text-[1rem] cursor-pointer justify-end ">
+          Forgot password?
+        </span>
+      </Link>
       <button
         type="submit"
         className="bg-[#51D289] text-black w-[18rem] h-[2.5rem] rounded-sm"

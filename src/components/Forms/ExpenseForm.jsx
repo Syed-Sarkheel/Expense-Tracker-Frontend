@@ -11,6 +11,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
   const options = getCategoryData?.map((category) => {
     return { value: category?._id, label: category?.name };
   });
+
   console.log(options);
 
   const submitForm = (e) => {
@@ -40,6 +41,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
     setChecked(false);
     setCreateCategory("");
   };
+
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-full lg:w-1/2 xl:w-1/2 p-5">
       <h2 className="text-4xl mb-8 font-semibold text-white">Add Expense</h2>
@@ -60,6 +62,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
             onChange={(e) => setExpenseDate(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col">
           <label htmlFor="amount" className="text-xl font-medium">
             Amount
@@ -74,6 +77,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
             onWheel={(e) => e.target.blur()}
           />
         </div>
+
         <div className="flex gap-2 items-center text-center">
           <input
             type="checkbox"
@@ -83,6 +87,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
           />
           <label>Create Catergory</label>
         </div>
+
         {!checked ? (
           <Select
             options={options}
@@ -99,6 +104,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
             className="border-b-2 border-green-500 bg-transparent text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
           />
         )}
+
         <div className="flex flex-col">
           <label htmlFor="description" className="text-xl font-medium">
             Description

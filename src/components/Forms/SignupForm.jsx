@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 
-export default function SignupForm({ setUserData, setOtpData }) {
+export default function SignupForm({ setUserData }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +29,7 @@ export default function SignupForm({ setUserData, setOtpData }) {
             placeholder="Robin James"
           />
         </div>
+
         <div className="flex flex-col">
           <label className="font-semibold">Email:</label>
           <input
@@ -61,6 +62,7 @@ export default function SignupForm({ setUserData, setOtpData }) {
             />
           </div>
         </div>
+
         <button
           type="submit"
           className="bg-[#51D289] text-black w-[18rem] h-[2.5rem] rounded-sm"

@@ -15,6 +15,7 @@ export default function IncomeForm({ submitFormData }) {
     setDescription("");
     setCategory("");
   };
+
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-full lg:w-1/2 xl:w-1/2 p-5">
       <h2 className="text-4xl mb-8 font-semibold text-white">Add Income</h2>
@@ -36,6 +37,7 @@ export default function IncomeForm({ submitFormData }) {
             onChange={(e) => setIncomeDate(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col">
           <label htmlFor="amount" className="text-xl font-medium">
             Amount
@@ -50,6 +52,7 @@ export default function IncomeForm({ submitFormData }) {
             onWheel={(e) => e.target.blur()}
           />
         </div>
+
         <div className="flex flex-col">
           <label htmlFor="category" className="text-xl font-medium">
             Source
@@ -63,6 +66,7 @@ export default function IncomeForm({ submitFormData }) {
             onChange={(e) => setCategory(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col">
           <label htmlFor="description" className="text-xl font-medium">
             Description
@@ -74,6 +78,7 @@ export default function IncomeForm({ submitFormData }) {
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none resize-none focus:border-green-700 transition-all duration-300 ease-in-out"
           />
         </div>
+
         <button
           type="submit"
           className="w-1/2 mx-auto mt-6 p-3 text-white bg-green-500 rounded-md hover:bg-green-600 active:bg-green-700 transition-all duration-300 ease-in-out transform hover:-translate-y-1"

@@ -1,6 +1,5 @@
 import { BiRupee } from "react-icons/bi";
 import { GiExpense, GiMoneyStack } from "react-icons/gi";
-import { SiCodenewbie } from "react-icons/si";
 
 export default function TransactionCard({
   description = "",
@@ -27,6 +26,7 @@ export default function TransactionCard({
             <GiExpense className={css} />
           )}
         </div>
+
         <div>
           <h5 className="text-2xl max-w-[12rem] overflow-x-hidden">
             {description}
@@ -34,6 +34,7 @@ export default function TransactionCard({
           <p>Date: {date}</p>
         </div>
       </div>
+
       <p
         className={`text-xl items-center flex md:text-3xl text-center ${
           type === "income" ? "text-green-500" : "text-red-500"
