@@ -28,66 +28,41 @@ export default function AddExpense() {
   const CreateCategory = usePostData("/category");
   const SubmitExpense = usePostData("/expense");
 
-  const submitFormData = (sendData) => {
-    var data;
-    if (sendData?.newCategory) {
-      CreateCategory({ name: sendData.category })
-        .then((res) => {
-          setCategoryResponse(res);
-          data = res;
-        })
-        .catch((err) => {
-          console.log(err);
-          setCategoryResponse({
-            data: null,
-            err: true,
-            message: "Not able to create such category. Try again!",
-          });
-          alert("Not able to create such category. Try again!");
-        });
-      if (categoryResponse?.data?._id) {
-        SubmitExpense({
-          category: categoryResponse?.data?._id,
-          date: sendData?.expenseDate,
-          amount: sendData?.amount,
-          description: sendData?.description,
-        })
-          .then((res) => {
-            setExpenseResponse(res);
-            data = res;
-            alert(res?.message);
-          })
-          .catch((err) => {
-            console.log(err);
-            setExpenseResponse({
-              data: null,
-              err: true,
-              message: "Not able to create such expense. Try again!",
-            });
-            alert("Not able to create such expense. Try again!");
-          });
+  const submitFormData = async (sendData) => {
+    try {
+      let categoryId;
+
+      if (sendData?.newCategory) {
+        const res = await CreateCategory({ name: sendData.category });
+        setCategoryResponse(res);
+
+        if (res?.data?._id) {
+          categoryId = res.data._id;
+        } else {
+          throw new Error("Category creation failed");
+        }
+      } else {
+        categoryId = sendData?.category?.value;
       }
-    } else {
-      SubmitExpense({
-        category: sendData?.category?.value,
+
+      const expenseData = {
+        category: categoryId,
         date: sendData?.expenseDate,
         amount: sendData?.amount,
         description: sendData?.description,
-      })
-        .then((res) => {
-          setExpenseResponse(res);
-          data = res;
-          alert(res?.message);
-        })
-        .catch((err) => {
-          console.log(err);
-          setExpenseResponse({
-            data: null,
-            err: true,
-            message: "Not able to create such expense. Try again!",
-          });
-          alert("Not able to create such expense. Try again!");
-        });
+      };
+
+      const expenseRes = await SubmitExpense(expenseData);
+      setExpenseResponse(expenseRes);
+      alert(expenseRes?.message);
+    } catch (err) {
+      console.error("Error:", err);
+      setExpenseResponse({
+        data: null,
+        err: true,
+        message: "Not able to create such expense. Try again!",
+      });
+      alert("Not able to create such expense. Try again!");
     }
   };
 

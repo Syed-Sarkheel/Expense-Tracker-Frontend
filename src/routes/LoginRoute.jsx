@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
-import SignupPage from "../pages/SignupPage";
-import OtpPage from "../pages/OtpPage";
+import LoginPage from "../pages/Auth/LoginPage";
+import SignupPage from "../pages/Auth/SignupPage";
+import OtpPage from "../pages/Auth/OtpPage";
 
 export default function LoginRoute() {
   return (

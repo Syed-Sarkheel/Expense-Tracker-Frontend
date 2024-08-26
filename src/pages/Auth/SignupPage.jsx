@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import LoginImg from "../assets/login_image.svg";
-import SignupForm from "../components/Forms/SignupForm";
-import usePostData from "../hooks/usePostData";
+import LoginImg from "../../assets/login_image.svg";
+import SignupForm from "../../components/Forms/SignupForm";
+import usePostData from "../../hooks/usePostData";
 
 export default function SignupPage() {
   const fetchData = usePostData("/auth/register");

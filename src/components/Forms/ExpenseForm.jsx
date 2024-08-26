@@ -34,12 +34,12 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
         newCategory: false,
       });
 
-    setExpenseDate("");
-    setAmount("");
-    setDescription("");
-    setCategory("");
-    setChecked(false);
-    setCreateCategory("");
+    // setExpenseDate("");
+    // setAmount("");
+    // setDescription("");
+    // setCategory("");
+    // setChecked(false);
+    // setCreateCategory("");
   };
 
   return (
@@ -56,6 +56,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
           </label>
           <input
             type="date"
+            value={expenseDate}
             id="date"
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
             required
@@ -69,6 +70,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
           </label>
           <input
             type="number"
+            value={amount}
             id="amount"
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out"
             required
@@ -89,12 +91,14 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
         </div>
 
         {!checked ? (
-          <Select
-            options={options}
-            className="w-[18rem] text-bl"
-            value={category}
-            onChange={(state) => setCategory(state)}
-          />
+          <div className="text-black">
+            <Select
+              options={options}
+              className="w-[18rem] text-bl text-black"
+              value={category}
+              onChange={(state) => setCategory(state)}
+            />
+          </div>
         ) : (
           <input
             type="text"
@@ -111,6 +115,7 @@ export default function ExpenseForm({ submitFormData, getCategoryData }) {
           </label>
           <textarea
             id="description"
+            value={description}
             className="border-b-2 border-green-500 bg-inherit text-lg p-2 outline-none focus:border-green-700 transition-all duration-300 ease-in-out resize-none"
             onChange={(e) => setDescription(e.target.value)}
           />

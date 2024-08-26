@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import LoginImg from "../assets/login_image.svg";
-import LoginForm from "../components/Forms/LoginForm";
-import usePostData from "../hooks/usePostData";
+import LoginImg from "../../assets/login_image.svg";
+import LoginForm from "../../components/Forms/LoginForm";
+import usePostData from "../../hooks/usePostData";
 import Cookies from "js-cookie";
 
 export default function LoginPage() {

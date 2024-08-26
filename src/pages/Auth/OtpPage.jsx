@@ -1,7 +1,7 @@
 import React from "react";
-import LoginImg from "../assets/login_image.svg";
-import OtpForm from "../components/Forms/OtpForm";
-import usePostData from "../hooks/usePostData";
+import LoginImg from "../../assets/login_image.svg";
+import OtpForm from "../../components/Forms/OtpForm";
+import usePostData from "../../hooks/usePostData";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 

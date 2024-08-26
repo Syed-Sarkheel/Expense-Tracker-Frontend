@@ -23,7 +23,7 @@ export default function SignupForm({ setUserData }) {
             type={"name"}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="bg-black text-white py-0.5 border-green-500 px-1.5 border-b focus:border-green-300 focus:outline-none h-[2.5rem] w-[18rem]"
+            className="bg-black text-white py-0.5 border-green-500 px-1.5 border-b focus:border-green-700 focus:outline-none h-[2.5rem] w-[18rem]"
             autoFocus
             required
             placeholder="Robin James"
@@ -36,7 +36,7 @@ export default function SignupForm({ setUserData }) {
             type={"email"}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-black text-white border-green-500 py-0.5 px-1.5 border-b focus:border-white focus:outline-none h-[2.5rem] w-[18rem]"
+            className="bg-black text-white border-green-500 py-0.5 px-1.5 border-b focus:border-green-700 focus:outline-none h-[2.5rem] w-[18rem]"
             autoFocus
             required
             placeholder="Eg. robin@hotmail.com"
@@ -45,7 +45,7 @@ export default function SignupForm({ setUserData }) {
 
         <div className="flex flex-col">
           <label className="font-semibold">Password:</label>
-          <div className="flex justify-center items-center border-b border-green-500 focus:border-green-300">
+          <div className="flex justify-center items-center border-b border-green-500 focus:border-green-700">
             <input
               type={showPassword ? "text" : "password"}
               value={password}
