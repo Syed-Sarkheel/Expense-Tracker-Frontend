@@ -66,7 +66,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="flex flex-col lg:flex-row gap-2 w-full">
+    <div className="flex max-h-lvh  gap-2 w-full">
       <Sidebar />
       <div className="text-4xl font-semibold p-5 w-full">
         <h2>Hello, {username}</h2>
@@ -74,7 +74,7 @@ export default function Dashboard() {
           {transactions.map((transaction, index) => (
             <div
               key={index}
-              className="shadow-md shadow-green-700 hover:drop-shadow-lg p-5 w-full sm:w-[80%] md:w-[50%] lg:w-[25%] bg-neutral-900 gap-6 rounded-md flex flex-col items-center text-center"
+              className="shadow-md shadow-green-700 hover:drop-shadow-lg p-5 w-full sm:w-[80%] md:w-[50%] lg:w-[30%] xl:w-[25%] bg-neutral-900 gap-6 rounded-md flex flex-col items-center text-center"
             >
               <div>{transaction.icon}</div>
               <div className="flex flex-col gap-4 bg-transparent">
@@ -87,8 +87,8 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
-        <div className="flex w-full gap-4 mt-4 cursor-default">
-          <div className="flex flex-col w-[50%] text-sm bg-neutral-900 p-4 rounded-md overflow-hidden shadow-sm shadow-green-700">
+        <div className="flex flex-col lg:flex-row w-full gap-4 mt-4 cursor-default">
+          <div className="flex flex-col w-full lg:w-[50%] text-sm bg-neutral-900 p-4 rounded-md overflow-hidden shadow-sm shadow-green-700">
             <h3 className="mb-8">Recent Transactions</h3>
             {recentTransactions.map((transaction, index) => (
               <TransactionCard
@@ -101,7 +101,7 @@ export default function Dashboard() {
               />
             ))}
           </div>
-          <div className="flex flex-col w-[50%] bg-neutral-900 rounded-md p-4 shadow-sm shadow-green-700">
+          <div className="flex flex-col w-full lg:w-[50%] bg-neutral-900 rounded-md p-4 shadow-sm shadow-green-700">
             <h3 className="mb-4 text-sm">Transaction Analysis</h3>
             <GraphGenerator
               data={[...graphValues]}

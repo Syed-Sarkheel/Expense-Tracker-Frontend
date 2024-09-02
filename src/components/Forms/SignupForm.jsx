@@ -20,11 +20,10 @@ export default function SignupForm({ setUserData }) {
         <div className="flex flex-col">
           <label className="font-semibold">Name:</label>
           <input
-            type={"name"}
+            type={"text"}
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="bg-black text-white py-0.5 border-green-500 px-1.5 border-b focus:border-green-700 focus:outline-none h-[2.5rem] w-[18rem]"
-            autoFocus
             required
             placeholder="Robin James"
           />
@@ -37,7 +36,6 @@ export default function SignupForm({ setUserData }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="bg-black text-white border-green-500 py-0.5 px-1.5 border-b focus:border-green-700 focus:outline-none h-[2.5rem] w-[18rem]"
-            autoFocus
             required
             placeholder="Eg. robin@hotmail.com"
           />

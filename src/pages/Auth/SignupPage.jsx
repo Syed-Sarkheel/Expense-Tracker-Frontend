@@ -12,7 +12,7 @@ export default function SignupPage() {
     const { data, err, message } = await fetchData(sendData);
     setTimeout(() => {
       if (err) {
-        alert(message);
+        alert(message || "An unexpected error occurred. Please try again.");
       } else {
         alert(
           `User with email: ${data?.user?.email} is successfully registered.`
